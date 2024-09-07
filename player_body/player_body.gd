@@ -1,22 +1,40 @@
 extends CharacterBody2D
 
+@export var max_speed = 350
+@export var acceleration = 1500
+@export var friction = 2000
 
-@export var speed = 300.0
-@export var rotation_speed = 3.0
+var axis = Vector2.ZERO
 
-var rotation_direction = 0
 
 func get_input():
 	
-	var movement = int(Input.is_key_label_pressed(KEY_S)) - int(Input.is_key_label_pressed(KEY_Z))
+	axis.x = int(Input.is_key_label_pressed(KEY_D)) - int(Input.is_key_label_pressed(KEY_Q))
+	axis.y = int(Input.is_key_label_pressed(KEY_S)) - int(Input.is_key_label_pressed(KEY_Z))
 	
-	rotation_direction = int(Input.is_key_label_pressed(KEY_D)) - int(Input.is_key_label_pressed(KEY_Q))
+	return axis.normalized()
 	
-	velocity = transform.x * movement * speed
-	
-
 func _physics_process(delta: float) -> void:
+	
+	var screen_size = $Player_Area.screen_size
+	var input = get_input()
+	
+	if input == Vector2.ZERO:
 
-	get_input()
-	rotation += rotation_direction * rotation_speed * delta
+		if velocity.length() > (friction * delta): # deceleration process
+			velocity -= velocity.normalized() * (friction * delta)
+			
+		else:
+			velocity = Vector2.ZERO #makes sure there's no residual movements while the player should have stopped
+
+	else:
+
+		velocity += (input * acceleration * delta) #acceleration process
+		velocity = velocity.limit_length(max_speed)
+	
+	position += velocity * delta
+	position = position.clamp(Vector2.ZERO, screen_size) #keep the player center inside the screen
+	
+	$AnimatedSprite2D.play()
+	
 	move_and_slide()
