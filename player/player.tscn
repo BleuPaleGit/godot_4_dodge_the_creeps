@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://c635tettrawin"]
+
+[ext_resource type="Shape2D" uid="uid://t3xmacy4wft4" path="res://player/player_shape.tres" id="1_2y3mu"]
+[ext_resource type="Script" path="res://player/player.gd" id="1_u4fy8"]
+[ext_resource type="Texture2D" uid="uid://l3it0ifgiii0" path="res://art/player/player_walk1.png" id="2_ne8y4"]
+[ext_resource type="Texture2D" uid="uid://bhqm7frkbw0ty" path="res://art/player/player_walk2.png" id="3_g86cg"]
+[ext_resource type="Texture2D" uid="uid://n2cejgrlbot" path="res://art/player/player_walk3.png" id="4_6tcbj"]
+[ext_resource type="Texture2D" uid="uid://bufhuy8hkeeq1" path="res://art/player/player_walk4.png" id="5_gck4l"]
+[ext_resource type="Texture2D" uid="uid://ot40eyjioly8" path="res://art/player/player_particle.png" id="7_xpbu8"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5mk8h"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7x22x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ne8y4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_g86cg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6tcbj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_gck4l")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 0
+script = ExtResource("1_u4fy8")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -25)
+shape = ExtResource("1_2y3mu")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 50)
+amount = 12
+process_material = SubResource("ParticleProcessMaterial_5mk8h")
+texture = ExtResource("7_xpbu8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_7x22x")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="AreaCollisionShape" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -25)
+shape = ExtResource("1_2y3mu")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://cex05ntjhv5wh"]
+
+[ext_resource type="Texture2D" uid="uid://bgiep324y3rkr" path="res://art/enemy1/enemy1.png" id="1_5bw6e"]
+[ext_resource type="Script" path="res://mob_1/mob.gd" id="1_ierhu"]
+[ext_resource type="Texture2D" uid="uid://ddfqitmlc2bth" path="res://art/enemy1/enemy2.png" id="2_0nt6o"]
+[ext_resource type="Texture2D" uid="uid://cv5q4wc4hm58j" path="res://art/enemy1/enemy3.png" id="3_jy101"]
+[ext_resource type="Texture2D" uid="uid://t3nywo7ltuej" path="res://art/enemy1/enemy4.png" id="4_tsjqp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nj683"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5bw6e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_0nt6o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_jy101")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_tsjqp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f3dwe"]
+radius = 45.0
+height = 92.0
+
+[node name="Mob" type="RigidBody2D" groups=["mobs"]]
+collision_layer = 4
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_ierhu")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_nj683")
+frame = 3
+frame_progress = 0.741115
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_f3dwe")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -1,0 +1,211 @@
+[gd_scene load_steps=5 format=3 uid="uid://cr8hqxlbgdooy"]
+
+[ext_resource type="Script" path="res://hud.gd" id="1_4h0ff"]
+[ext_resource type="FontFile" uid="uid://bhulgi4idcde7" path="res://fonts/Xolonium-Regular.ttf" id="1_g0jxg"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_ih6ol"]
+action = &"start_game"
+
+[sub_resource type="Shortcut" id="Shortcut_djjyx"]
+events = [SubResource("InputEventAction_ih6ol")]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_4h0ff")
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -22.5
+offset_top = 20.0
+offset_right = 22.5
+offset_bottom = 98.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_g0jxg")
+theme_override_font_sizes/font_size = 64
+text = "0"
+horizontal_alignment = 1
+
+[node name="Message" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -60.0
+offset_right = 240.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_g0jxg")
+theme_override_font_sizes/font_size = 64
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -200.0
+offset_right = 100.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_g0jxg")
+theme_override_font_sizes/font_size = 64
+shortcut = SubResource("Shortcut_djjyx")
+text = "Start"
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="NewHightScore" type="VBoxContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -226.0
+offset_top = -121.0
+offset_right = 222.0
+offset_bottom = 121.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CongratsMessage" type="Label" parent="NewHightScore"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_g0jxg")
+theme_override_font_sizes/font_size = 60
+text = "CONGRATS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CongratsSubtitle" type="Label" parent="NewHightScore"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_g0jxg")
+theme_override_font_sizes/font_size = 20
+text = "You've Made It To The Leaderboard !"
+horizontal_alignment = 1
+
+[node name="EnterPlayerName" type="LineEdit" parent="NewHightScore"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_g0jxg")
+theme_override_font_sizes/font_size = 44
+placeholder_text = "Enter Your Name"
+alignment = 1
+max_length = 15
+
+[node name="LeaderBoard" type="VBoxContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -203.5
+offset_top = -210.0
+offset_right = 203.5
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="LeaderBoard"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_g0jxg")
+theme_override_font_sizes/font_size = 60
+text = "Leaderboard"
+horizontal_alignment = 1
+
+[node name="First" type="HBoxContainer" parent="LeaderBoard"]
+layout_mode = 2
+
+[node name="PlayerName" type="Label" parent="LeaderBoard/First"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_g0jxg")
+theme_override_font_sizes/font_size = 44
+text = "Name"
+
+[node name="Score" type="Label" parent="LeaderBoard/First"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_g0jxg")
+theme_override_font_sizes/font_size = 44
+text = "0"
+
+[node name="Second" type="HBoxContainer" parent="LeaderBoard"]
+layout_mode = 2
+
+[node name="PlayerName" type="Label" parent="LeaderBoard/Second"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_g0jxg")
+theme_override_font_sizes/font_size = 44
+text = "Name"
+
+[node name="Score" type="Label" parent="LeaderBoard/Second"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_g0jxg")
+theme_override_font_sizes/font_size = 44
+text = "0"
+
+[node name="Third" type="HBoxContainer" parent="LeaderBoard"]
+layout_mode = 2
+
+[node name="PlayerName" type="Label" parent="LeaderBoard/Third"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_g0jxg")
+theme_override_font_sizes/font_size = 44
+text = "Name"
+
+[node name="Score" type="Label" parent="LeaderBoard/Third"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_g0jxg")
+theme_override_font_sizes/font_size = 44
+text = "0"
+
+[node name="Fourth" type="HBoxContainer" parent="LeaderBoard"]
+layout_mode = 2
+
+[node name="PlayerName" type="Label" parent="LeaderBoard/Fourth"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_g0jxg")
+theme_override_font_sizes/font_size = 44
+text = "Name"
+
+[node name="Score" type="Label" parent="LeaderBoard/Fourth"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_g0jxg")
+theme_override_font_sizes/font_size = 44
+text = "0"
+
+[node name="Fifth" type="HBoxContainer" parent="LeaderBoard"]
+layout_mode = 2
+
+[node name="PlayerName" type="Label" parent="LeaderBoard/Fifth"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_g0jxg")
+theme_override_font_sizes/font_size = 44
+text = "Name"
+
+[node name="Score" type="Label" parent="LeaderBoard/Fifth"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_g0jxg")
+theme_override_font_sizes/font_size = 44
+text = "0"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
+[connection signal="text_submitted" from="NewHightScore/EnterPlayerName" to="." method="_on_enter_player_name_text_submitted"]
